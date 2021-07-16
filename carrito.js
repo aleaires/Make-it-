@@ -116,7 +116,7 @@ function indice(elem,array){
 
 let costo = 0;
 let carrito = [[]];
-let objetos = [["btn_1","acostado",330],["btn_2","leyendo 1",420],["btn_3","leyendo 3",480],["btn_4","meditando",370],["btn_5","sabio",450],["btn_6","sentado",330]];
+let objetos = [["btn_1","acostado",330],["btn_2","leyendo 1",420],["btn_3","leyendo 3",480],["btn_4","meditando",370],["btn_5","sabios",450],["btn_6","sentado",330]];
 let objeto = "";
 let respuesta = 0;
 let total = 0;
@@ -151,11 +151,11 @@ function modify_chart(amount,nombre){
 //Conversion de pesos a dolares
 function change_currency(amount){
 	if(document.getElementById("currency").innerHTML == "UYU"){
-		din.textContent = Math.round((amount / 44)*100)/100;
+		din.textContent = Math.round((amount / 43.88)*100)/100;
 		document.getElementById("currency").textContent = "USD";
 		document.getElementById("currency_text_btn").textContent = "UYU";
 	}else if (document.getElementById("currency").innerHTML == "USD"){
-		din.textContent = Math.round((amount * 44));
+		din.textContent = Math.round((amount * 43.88));
 		document.getElementById("currency").textContent = "UYU";
 		document.getElementById("currency_text_btn").textContent = "USD";
 	}
