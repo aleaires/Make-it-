@@ -114,6 +114,7 @@ function indice(elem,array){
 
 /////   variables html :: carrito
 
+let pedidos = [];
 let costo = 0;
 let carrito = [[]];
 let objetos = [["btn_1","acostado",330],["btn_2","leyendo 1",420],["btn_3","leyendo 3",480],["btn_4","meditando",370],["btn_5","sabios",450],["btn_6","sentado",330]];
@@ -131,21 +132,27 @@ function modify_chart(amount,nombre){
 	total = total + amount;
 	din.textContent = total;
 	let i = 0;
-	let str_aux = "";
+	let objetosCarrito = document.getElementById("objetos_carrito");
 	while(i <= carrito.length - 1 && carrito[i][0] != nombre){
 		console.log(carrito[i][0]);
 		i++;
 	}
 	if (i == carrito.length) {
 		carrito.push([document.getElementById(nombre).innerHTML.toLowerCase(),1]);
-		carrito.forEach(element => console.log(element));	
+		let nuevoItem = objetosCarrito.appendChild(document.createElement('li'));
+		nuevoItem.setAttribute('id', 'carrito_' + nombre);
+		nuevoItem.textContent = nombre + "(" + carrito[i][1] + ")";
+
 	}else{
 		carrito[i][1] += 1;
+		document.getElementById('carrito_' + nombre).textContent = nombre + "(" + carrito[i][1] + ")";
 	}
-	for (let i = 1; i <= carrito.length - 1; i++) {
-		str_aux = str_aux + carrito[i][0] + "(" + carrito[i][1] + ")" + ", ";
-	}
-	chart.textContent = str_aux;
+}
+
+//remover objetos del carrito
+function remove_from_chart(nombre){
+	let item = document.getElementById("objetos_carrito").getElementById('carrito_' + nombre);
+	item.remove();
 }
 
 //Conversion de pesos a dolares
@@ -169,6 +176,13 @@ document.querySelector("body").addEventListener("click", function (e){
 			modify_chart(objetos[i][2],objetos[i][1]);
 		}
 	}
+
+});
+
+//evento agregar dinero y objetos al carrito al clickear "Agregar al carrito"
+document.querySelector("body").addEventListener("click", function (e){
+	if ('carrito_acostado' == e.target) {
+	remove_from_chart(e.target);}
 });
 
 //evento cambio de moneda
